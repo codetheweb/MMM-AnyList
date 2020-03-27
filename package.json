@@ -1,0 +1,41 @@
+{
+  "name": "MMM-AnyList",
+  "description": "A Magic Mirror Module for AnyList",
+  "keywords": [],
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "xo",
+    "lint-fix": "xo --fix"
+  },
+  "dependencies": {
+    "anylist": "^0.1.2",
+    "xo": "^0.28.1"
+  },
+  "devDependencies": {
+    "husky": "^4.2.3"
+  },
+  "xo": {
+    "env": [
+      "browser",
+      "node"
+    ],
+    "rules": {
+      "unicorn/filename-case": "off"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwburger/AnyListModule.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dwburger/AnyListModule/issues"
+  },
+  "homepage": "https://github.com/dwburger/AnyListModule"
+}

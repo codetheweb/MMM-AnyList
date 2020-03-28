@@ -12,11 +12,13 @@ module.exports = NodeHelper.create({
 
 			this.anylist = new AnyList({email, password});
 
+			// Send update when list is updated
+			this.anylist.on('lists-update', () => {
+				this.sendSocketNotification('LIST_DATA', this.anylist.getListByName(list));
+			});
+
 			await this.anylist.login();
 			await this.anylist.getLists();
-
-			// TODO: add handler for when list is updated
-			// TODO: support multiple lists?
 
 			this.sendSocketNotification('LIST_DATA', this.anylist.getListByName(list));
 		}

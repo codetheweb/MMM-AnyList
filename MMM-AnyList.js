@@ -1,11 +1,12 @@
-// Constants
-const UPDATE_ANIMATION_DURATION_MS = 500;
-const MAX_ITEMS_IN_LIST = 10;
-const START_FADE_POSITION = 0.25; // Percentage
-
 // eslint-disable-next-line no-undef
 Module.register('MMM-AnyList', {
-	defaults: {},
+	defaults: {
+		onlyShowUnchecked: true,
+		maxItemsInList: 10,
+		fade: true,
+		fadePoint: 0.5,
+		animationSpeed: 2000
+	},
 
 	start() {
 		// Send user config to backend
@@ -38,7 +39,7 @@ Module.register('MMM-AnyList', {
 
 			itemRow.innerHTML = item.name;
 			itemRow.className = 'light';
-			itemRow.style.opacity = this._getFadedOpacity(this.list.items.length, i);
+			itemRow.style.opacity = this.config.fade ? this._getFadedOpacity(this.list.items.length, i) : 1;
 
 			listContainer.append(itemRow);
 		});
@@ -48,12 +49,21 @@ Module.register('MMM-AnyList', {
 
 	socketNotificationReceived(notification, payload) {
 		if (notification === 'LIST_DATA') {
-			// TODO: what should happen for large lists?
 			// Update local data
-			this.list = {...payload, items: payload.items.slice(0, MAX_ITEMS_IN_LIST)};
+			let items = payload.items;
+
+			if (this.config.onlyShowUnchecked) {
+				items = items.filter(i => !i.checked);
+			}
+
+			if (this.config.maxItemsInList) {
+				items = items.slice(0, this.config.maxItemsInList);
+			}
+
+			this.list = {...payload, items};
 
 			// Update display
-			this.updateDom(UPDATE_ANIMATION_DURATION_MS);
+			this.updateDom(this.config.animationSpeed);
 		}
 	},
 
@@ -61,7 +71,7 @@ Module.register('MMM-AnyList', {
 		return ['MMM-AnyList.css'];
 	},
 
-	_getFadedOpacity(length_, i, startPercentage = START_FADE_POSITION) {
+	_getFadedOpacity(length_, i, startPercentage = this.config.fadePoint) {
 		// Calculates the opacity of an item in a list
 		// given a percentage at which to start fading out.
 		const startIndex = length_ * startPercentage;

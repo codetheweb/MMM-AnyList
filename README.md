@@ -17,8 +17,8 @@ Example config:
     // Optional, values listed are the defaults
     onlyShowUnchecked: true,
     maxItemsInList: 10,
-    hilightAlternateRows: false, //default is false
-    hilightColor: darkslategrey, //default is darkslategrey
+    highlightAlternateRows: 'false',
+    highlightColor: 'darkslategrey',
     fade: true,
     fadePoint: 0.5,
     animationSpeed: 2000,

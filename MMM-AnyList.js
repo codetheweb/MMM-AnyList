@@ -6,8 +6,8 @@ Module.register('MMM-AnyList', {
 		fade: true,
 		fadePoint: 0.5,
 		animationSpeed: 2000,
-		hilightAlternateRows: false,
-		hilightColor: 'darkslategrey'
+		highlightAlternateRows: false,
+		highlightColor: 'darkslategrey'
 	},
 
 	start() {
@@ -42,8 +42,8 @@ Module.register('MMM-AnyList', {
 			itemRow.className = 'light';
 			itemRow.style.opacity = this.config.fade ? this._getFadedOpacity(this.list.items.length, i) : 1;
 
-			if (i % 2 === 0 && this.config.hilightAlternateRows) {
-				itemRow.style.backgroundColor = this.config.hilightColor;
+			if (i % 2 === 0 && this.config.highlightAlternateRows) {
+				itemRow.style.backgroundColor = this.config.highlightColor;
 			}
 
 			listContainer.append(itemRow);

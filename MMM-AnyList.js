@@ -5,7 +5,9 @@ Module.register('MMM-AnyList', {
 		maxItemsInList: 10,
 		fade: true,
 		fadePoint: 0.5,
-		animationSpeed: 2000
+		animationSpeed: 2000,
+		hilightAlternateRows: false,
+		hilightColor: 'darkslategrey'
 	},
 
 	start() {
@@ -36,10 +38,13 @@ Module.register('MMM-AnyList', {
 		// Add items to container
 		this.list.items.forEach((item, i) => {
 			const itemRow = document.createElement('li');
-
+			
 			itemRow.innerHTML = item.name;
 			itemRow.className = 'light';
 			itemRow.style.opacity = this.config.fade ? this._getFadedOpacity(this.list.items.length, i) : 1;
+
+			if(i%2 === 0 && this.config.hilightAlternateRows )
+				itemRow.style.backgroundColor = this.config.hilightColor;
 
 			listContainer.append(itemRow);
 		});

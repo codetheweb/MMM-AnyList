@@ -16,10 +16,12 @@ Example config:
     list: 'your-list-name',
     // Optional, values listed are the defaults
     onlyShowUnchecked: true,
-		maxItemsInList: 10,
-		fade: true,
-		fadePoint: 0.5,
-		animationSpeed: 2000
+    maxItemsInList: 10,
+    hilightAlternateRows: false, //default is false
+    hilightColor: darkslategrey, //default is darkslategrey
+    fade: true,
+    fadePoint: 0.5,
+    animationSpeed: 2000,
   }
 }
 ```

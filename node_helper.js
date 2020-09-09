@@ -1,12 +1,20 @@
 const NodeHelper = require('node_helper');
 const AnyList = require('anylist');
 
+let calls = 0;
+
 module.exports = NodeHelper.create({
 	start() {
 		console.log(`Starting node helper: ${this.name}`);
 	},
 
 	async socketNotificationReceived(notification, payload) {
+		calls++;
+
+		if (calls % 2 === 0) {
+			await new Promise(resolve => setTimeout(resolve, 3000));
+		}
+
 		if (notification === 'INIT') {
 			const {email, password, list} = payload;
 

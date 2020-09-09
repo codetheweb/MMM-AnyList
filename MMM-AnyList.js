@@ -53,7 +53,7 @@ Module.register('MMM-AnyList', {
 	},
 
 	socketNotificationReceived(notification, payload) {
-		if (notification === 'LIST_DATA') {
+		if (notification === 'LIST_DATA' && payload.name === this.config.list) {
 			// Update local data
 			let items = payload.items;
 

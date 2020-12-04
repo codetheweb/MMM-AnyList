@@ -33,6 +33,9 @@ Module.register('MMM-AnyList', {
 
 		// Create list item container
 		const listContainer = document.createElement('ul');
+		if (this.config.hideBullets) {
+			listContainer.style.listStyleType = 'none';
+		}
 		wrapper.append(listContainer);
 
 		// Add items to container

@@ -16,6 +16,7 @@ Example config:
     list: 'your-list-name',
     // Optional, values listed are the defaults
     onlyShowUnchecked: true,
+	hideBullets: false,
     maxItemsInList: 10,
     highlightAlternateRows: 'false',
     highlightColor: 'darkslategrey',

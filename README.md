@@ -2,6 +2,11 @@
 
 MMM-AnyList is a Magic Mirror Module for AnyList.
 
+### Usage
+
+1. Clone: `git clone https://github.com/codetheweb/MMM-AnyList.git`
+2. Install dependencies: `cd MMM-AnyList && npm i`
+
 ### Config
 
 Example config:

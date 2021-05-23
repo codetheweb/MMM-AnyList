@@ -6,6 +6,8 @@ Module.register('MMM-AnyList', {
 		fade: true,
 		fadePoint: 0.5,
 		animationSpeed: 2000,
+		highlightAlternateRows: false,
+		highlightColor: 'darkslategrey',
 		trimText: true,
 		showCategories: true,
 		showQuantities: true
@@ -77,6 +79,10 @@ Module.register('MMM-AnyList', {
 				itemCellQuantity.style.width = '50px';
 				itemCellQuantity.style.textAlign = 'right';
 				itemRow.append(itemCellQuantity);
+			}
+
+			if (i % 2 === 0 && this.config.highlightAlternateRows && !this.config.showCategories) {
+				itemRow.style.backgroundColor = this.config.highlightColor;
 			}
 
 			tableContainer.append(itemRow);

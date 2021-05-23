@@ -88,6 +88,8 @@ The entry in `config.js` can include the following options:
 |`fade`|Toggle to fade out list towards the end|`true`|`true / false`|
 |`fadePoint`|Rate at which to fade out|`0.5`|`A number between 0 and 1`|
 |`animationSpeed`|Speed for refresh animation|`2000`|`Any number (in milliseconds)`|
+|`highlightAlternateRows`|Highlights every second row.  Not available when showing categories|`false`|`true / false`|
+|`highlightColor`|The color to highlight|`darkslategrey`|`Any color value`|
 |`trimText`|Trim any items more than 25 characters long to save space|`true`|`true / false`|
 |`showCategories`|Use item categories as table headers|`true`|`true / false`|
 |`showQuantities`|Show the quantity of each item from your list|`true`|`true / false`|

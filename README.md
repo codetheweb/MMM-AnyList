@@ -4,8 +4,7 @@ MMM-AnyList is a Magic Mirror Module for [AnyList](https://www.anylist.com/).
 
 
 ## Screenshot
-![anylist](https://user-images.githubusercontent.com/57517624/119251278-f95ffb80-bbf9-11eb-9c4a-160f003982cc.png)
-
+![screenshot](/anylist.png)
 
 
 ## Installation
@@ -17,6 +16,7 @@ npm install
 ````
 
 Activate the module by adding it to the config.js file as shown below.
+
 
 ## Using the module
 ```javascript

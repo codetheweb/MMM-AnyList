@@ -49,12 +49,17 @@ Module.register('MMM-AnyList', {
 			if (item.categoryMatchId !== category && this.config.showCategories) {
 				const header = document.createElement('th');
 
-				const toUpper = item.categoryMatchId[0].toUpperCase() + item.categoryMatchId.slice(1); // Make first letter upper case
+				const toUpper =
+          item.categoryMatchId[0].toUpperCase() + item.categoryMatchId.slice(1); // Make first letter upper case
 				const format = toUpper.replace(/-/g, ' '); // Replace hyphens with spaces
 
 				if (i > 0) {
 					header.style.paddingTop = '12px';
 				} // Add padding if not the first category
+
+				header.style.opacity = this.config.fade ?
+					this._getFadedOpacity(this.list.items.length, i) :
+					1;
 
 				header.innerHTML = format;
 				tableContainer.append(header);
@@ -81,9 +86,17 @@ Module.register('MMM-AnyList', {
 				itemRow.append(itemCellQuantity);
 			}
 
-			if (i % 2 === 0 && this.config.highlightAlternateRows && !this.config.showCategories) {
+			if (
+				i % 2 === 0 &&
+        this.config.highlightAlternateRows &&
+        !this.config.showCategories
+			) {
 				itemRow.style.backgroundColor = this.config.highlightColor;
 			}
+
+			itemRow.style.opacity = this.config.fade ?
+				this._getFadedOpacity(this.list.items.length, i) :
+				1;
 
 			tableContainer.append(itemRow);
 		});
@@ -108,7 +121,9 @@ Module.register('MMM-AnyList', {
 
 			const list = {...payload, items};
 
-			list.items.sort((a, b) => a.categoryMatchId.localeCompare(b.categoryMatchId)); // Sort items into category groups
+			list.items.sort((a, b) =>
+				a.categoryMatchId.localeCompare(b.categoryMatchId)
+			); // Sort items into category groups
 
 			this.list = list;
 
@@ -129,7 +144,7 @@ Module.register('MMM-AnyList', {
 
 		if (i >= startIndex) {
 			const currentFadeStep = i - startIndex;
-			return 1 - (1 / fadeSteps * currentFadeStep);
+			return 1 - ((1 / fadeSteps) * currentFadeStep);
 		}
 
 		return 1;

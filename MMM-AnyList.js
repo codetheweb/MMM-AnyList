@@ -121,9 +121,17 @@ Module.register('MMM-AnyList', {
 
 			const list = {...payload, items};
 
-			list.items.sort((a, b) =>
-				a.categoryMatchId.localeCompare(b.categoryMatchId)
-			); // Sort items into category groups
+			const itemsByCategory = {};
+
+			for (const item of list.items) {
+				if (itemsByCategory[item.categoryMatchId]) {
+					itemsByCategory[item.categoryMatchId].push(item);
+				} else {
+					itemsByCategory[item.categoryMatchId] = [item];
+				}
+			}
+
+			list.items = Object.keys(itemsByCategory).reduce((accum, category) => [...accum, ...itemsByCategory[category]], []);
 
 			this.list = list;
 

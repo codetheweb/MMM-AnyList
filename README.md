@@ -35,7 +35,8 @@ Activate the module by adding it to the config.js file as shown below.
     animationSpeed: 2000,
     trimText: true,
     showCategories: true,
-    showQuantities: true
+    showQuantities: true,
+    textAlign: 'center'
   }
 }
 ```
@@ -58,5 +59,6 @@ The entry in `config.js` can include the following options:
 |`trimText`|Trim any items more than 25 characters long to save space|`true`|`true / false`|
 |`showCategories`|Use item categories as table headers|`true`|`true / false`|
 |`showQuantities`|Show the quantity of each item from your list|`true`|`true / false`|
+|`textAlign`|Choose whether the items in the list are left-aligned or centered|`'center'`|`'center' / 'left'` 
 
 

@@ -10,7 +10,8 @@ Module.register('MMM-AnyList', {
 		highlightColor: 'darkslategrey',
 		trimText: true,
 		showCategories: true,
-		showQuantities: true
+		showQuantities: true,
+		textAlign: 'center'
 	},
 
 	start() {
@@ -41,16 +42,26 @@ Module.register('MMM-AnyList', {
 		const tableContainer = document.createElement('table');
 		tableContainer.className = 'small';
 
+		if (this.config.textAlign === 'left') {
+			tableContainer.className += ' leftAligned';
+		}
+
+		if (this.config.textAlign === 'center') {
+			tableContainer.className += ' centerAligned';
+		}
+
 		let category = '';
 
 		// Add items to container
 		this.list.items.forEach((item, i) => {
 			// Create header cell if current item is in a different category than the previous item
 			if (item.categoryMatchId !== category && this.config.showCategories) {
-				const header = document.createElement('th');
+				const headerRow = document.createElement('tr');
 
-				const toUpper =
-          item.categoryMatchId[0].toUpperCase() + item.categoryMatchId.slice(1); // Make first letter upper case
+				const header = document.createElement('th');
+				headerRow.append(header);
+
+				const toUpper = item.categoryMatchId[0].toUpperCase() + item.categoryMatchId.slice(1); // Make first letter upper case
 				const format = toUpper.replace(/-/g, ' '); // Replace hyphens with spaces
 
 				if (i > 0) {
@@ -62,7 +73,8 @@ Module.register('MMM-AnyList', {
 					1;
 
 				header.innerHTML = format;
-				tableContainer.append(header);
+
+				tableContainer.append(headerRow);
 
 				category = item.categoryMatchId;
 			}
@@ -88,8 +100,8 @@ Module.register('MMM-AnyList', {
 
 			if (
 				i % 2 === 0 &&
-        this.config.highlightAlternateRows &&
-        !this.config.showCategories
+		this.config.highlightAlternateRows &&
+		!this.config.showCategories
 			) {
 				itemRow.style.backgroundColor = this.config.highlightColor;
 			}

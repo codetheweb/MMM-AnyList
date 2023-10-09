@@ -5,3 +5,13 @@
   line-height: 25px;
   color: lightgray;
 }
+
+.anylist .leftAligned td,
+.anylist .leftAligned th {
+  text-align: left;
+}
+
+.anylist .centerAligned td,
+.anylist .centerAligned th {
+  text-align: center;
+}

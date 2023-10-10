@@ -35,9 +35,6 @@ Module.register('MMM-AnyList', {
 			return wrapper;
 		}
 
-		// Set list header to module header
-		this.data.header = this.list.name;
-
 		// Create table container
 		const tableContainer = document.createElement('table');
 		tableContainer.className = 'small';
@@ -132,6 +129,9 @@ Module.register('MMM-AnyList', {
 			}
 
 			const list = {...payload, items};
+
+			// Set list header to module header
+			this.data.header = list.name;
 
 			const itemsByCategory = {};
 

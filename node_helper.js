@@ -10,7 +10,7 @@ module.exports = NodeHelper.create({
 
 		// Limit concurrency, otherwise we get errors when
 		// logging in.
-		this.queue = queue(async (task, callback) => {
+		this.queue = queue(async task => {
 			const {notification, payload} = task;
 
 			if (notification === 'INIT') {
@@ -28,8 +28,6 @@ module.exports = NodeHelper.create({
 
 				this.sendSocketNotification('LIST_DATA', this.anylist.getListByName(list));
 			}
-
-			callback();
 		}, 1);
 
 		this.queue.error((err, task) => {

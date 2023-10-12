@@ -28,6 +28,13 @@ Module.register('MMM-AnyList', {
 		const wrapper = document.createElement('div');
 		wrapper.className = 'anylist';
 
+		if (this.error) {
+			// If an error was sent from the node_helper, display it in the UI
+			wrapper.innerHTML = `${this.error}`;
+			wrapper.className = 'small';
+			return wrapper;
+		}
+
 		if (!this.list) {
 			// Data hasn't been loaded yet, return
 			wrapper.innerHTML = 'Loading …';
@@ -118,6 +125,8 @@ Module.register('MMM-AnyList', {
 	socketNotificationReceived(notification, payload) {
 		if (notification === 'LIST_DATA' && payload.name === this.config.list) {
 			// Update local data
+			this.error = null;
+
 			let items = payload.items;
 
 			if (this.config.onlyShowUnchecked) {
@@ -148,6 +157,9 @@ Module.register('MMM-AnyList', {
 			this.list = list;
 
 			// Update display
+			this.updateDom(this.config.animationSpeed);
+		} else if (notification === 'ANYLIST_ERROR') {
+			this.error = payload;
 			this.updateDom(this.config.animationSpeed);
 		}
 	},

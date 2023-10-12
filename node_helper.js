@@ -4,11 +4,13 @@ const queue = require('async/queue');
 
 module.exports = NodeHelper.create({
 	start() {
+		const self = this;
+
 		console.log(`Starting node helper: ${this.name}`);
 
 		// Limit concurrency, otherwise we get errors when
-		// loging in.
-		this.queue = queue(async (task, callback) => {
+		// logging in.
+		this.queue = queue(async task => {
 			const {notification, payload} = task;
 
 			if (notification === 'INIT') {
@@ -26,9 +28,13 @@ module.exports = NodeHelper.create({
 
 				this.sendSocketNotification('LIST_DATA', this.anylist.getListByName(list));
 			}
-
-			callback();
 		}, 1);
+
+		this.queue.error((err, task) => {
+			const message = `AnyList module experienced an error while processing a ${task.notification} notification: ${err}`;
+			console.error(message);
+			self.sendSocketNotification('ANYLIST_ERROR', message);
+		});
 	},
 
 	async socketNotificationReceived(notification, payload) {

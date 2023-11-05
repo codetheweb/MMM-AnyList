@@ -10,7 +10,7 @@
     "lint-fix": "xo --fix"
   },
   "dependencies": {
-    "anylist": "^0.1.2",
+    "anylist": "^0.5.2",
     "async": "^3.2.0",
     "xo": "^0.28.1"
   },
